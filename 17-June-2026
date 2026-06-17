@@ -1,0 +1,20 @@
+class Solution {
+public:
+    bool isPalindrome(int x) {
+        // negative numbers are not palindrome
+        if (x < 0) return false;
+
+        // numbers ending in 0 (but not 0 itself) are not palindrome
+        if (x % 10 == 0 && x != 0) return false;
+
+        int rev = 0;
+
+        while (x > rev) {
+            rev = rev * 10 + x % 10;
+            x /= 10;
+        }
+
+        // even length OR odd length case
+        return (x == rev || x == rev / 10);
+    }
+};
