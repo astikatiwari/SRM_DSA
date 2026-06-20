@@ -30,6 +30,32 @@ public:
         for (int i = 3; i <= n; i++) {
             int curr = prev1 + prev2;
             prev2 = prev1;
+-----------------------------------------------------------------------------------------------------------------------------
+class Solution {
+public:
+    vector<vector<int>> ans;
+    vector<int> temp;
+
+    void dfs(vector<int>& c, int target, int i) {
+        if (target == 0) {
+            ans.push_back(temp);
+            return;
+        }
+
+        if (i == c.size() || target < 0) return;
+
+        temp.push_back(c[i]);
+        dfs(c, target - c[i], i);   // reuse same element
+        temp.pop_back();
+
+        dfs(c, target, i + 1);      // skip element
+    }
+
+    vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
+        dfs(candidates, target, 0);
+        return ans;
+    }
+};
             prev1 = curr;
         }
 
